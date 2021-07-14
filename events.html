@@ -1,0 +1,71 @@
+---
+layout: default
+title: Events
+css: /assets/css/event.css
+js: /assets/js/events.js
+---
+      <!-- Events -->
+      <div class="colorlib-intro">
+        <div class="container" id="events-div">
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1 text-center colorlib-heading animate-box">
+                    
+                </div>
+            </div>
+              <div class="row">
+                  <div class="animate-box fadeInUp animated-fast " id="events">
+
+                      {% for event in site.data.events %}
+                      <div class="col-md-6">
+                        <div class="event-card" data-target="#event-modal-{{forloop.index}}">
+                          <div class="event-content">
+                            <p class="name">
+                              <strong>
+                              {{event[1].title}} <br>
+                              </strong>
+                              <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#event-modal-{{forloop.index}}">
+                                Read More
+                              </button>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+
+                  </div>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      
+      
+      <!-- Modals -->
+      {% for event in site.data.events %}
+      <div class="modal fade" id="event-modal-{{forloop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLongTitle">{{event[1].title}}</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <strong>Date: </strong>{{event[1].date}} <br><br>
+              <strong>Sig: </strong>{{event[1].sig}}<br> <br>
+              {{event[1].description}} <br>
+              <br>
+              {%if event[1].links[0].url%}
+                <a href="{{event[1].links[0].url}}" class="btn btn-primary">{{event[1].links[0].title}}</a>
+              {%endif%}
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      
